@@ -3,9 +3,8 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-Gui, Add, Button, Default w80 gsub1, just text
-Gui, Add, Button, x59 y345 h135 w99 gsub2, test 2(3545)
-Gui, Add, DropDownList, vColorChoice, Black|White|Red|Green|Blue
+Gui, Add, Button, Default gsub1, Process Spectra
+Gui, Add, DropDownList, vColorChoice, 1PP|2PP|3PP|4PP|5PP|6PP|7PP|8PP|9PP|10PP|11PP|12PP|13PP|14PP|15PP|16PP|17PP|18PP|19PP|20PP
 gui, show, center
 return
 
