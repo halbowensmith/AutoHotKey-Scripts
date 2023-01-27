@@ -3,6 +3,13 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
+R1 := ""
+R2 := ""
+R3 := ""
+R4 := ""
+R5 := "" 
+Avg := ""
+
 setIntegrationRange(from, to)
 {
 WinActivate, ahk_class #32770
@@ -63,12 +70,31 @@ return
 
 ProcessSpectra:
 {
+setIntegrationRange(398,435)
+
+moveToSpectra("R1")
+R1 := copyIntegration()
+moveToSpectra("R2")
+R2 := copyIntegration()
+moveToSpectra("R3")
+R3 := copyIntegration()
+moveToSpectra("R4")
+R4 := copyIntegration()
+moveToSpectra("R5")
+R5 := copyIntegration()
+moveToSpectra("Avg")
+Avg := copyIntegration()
+
+
 Gui, Submit, Nohide
+oWorkBook := ComObjGet(FilePath)		; get reference to WorkBook
+oWorkbook.Application.Windows(oWorkbook.Name).Visible := 1	; just do it - too long to explain why...
+
 If (BlankSensor = 1)
 {
 Switch SensorNumber
 {
-Case "1PP":MsgBox, 1 print pass selected
+Case "1PP": oWorkbook.Worksheets("398-435cm-1").Range("C4").Value := R1	; set "Test" in "Sheet1" sheet, "A2" cell
 Case "2PP": MsgBox, 2 print pass selected
 Case "3PP": MsgBox, 2 print pass selected
 Case "4PP": MsgBox, 2 print pass selected
@@ -94,12 +120,35 @@ return
 }
 } Else if(BTSensor = 1)
 {
-MsgBox, BT Sensor Selected
+    Switch SensorNumber
+    {
+Case "1PP":MsgBox, 1 print pass selected
+Case "2PP": MsgBox, 2 print pass selected
+Case "3PP": MsgBox, 2 print pass selected
+Case "4PP": MsgBox, 2 print pass selected
+Case "5PP": MsgBox, 2 print pass selected
+Case "6PP": MsgBox, 2 print pass selected
+Case "7PP": MsgBox, 2 print pass selected
+Case "8PP": MsgBox, 2 print pass selected
+Case "9PP": MsgBox, 2 print pass selected
+Case "10PP": MsgBox, 2 print pass selected
+Case "11PP": MsgBox, 2 print pass selected
+Case "12PP": MsgBox, 2 print pass selected
+Case "13PP": MsgBox, 2 print pass selected
+Case "14PP": MsgBox, 2 print pass selected
+Case "15PP": MsgBox, 2 print pass selected
+Case "16PP": MsgBox, 2 print pass selected
+Case "17PP": MsgBox, 2 print pass selected
+Case "18PP": MsgBox, 2 print pass selected
+Case "19PP": MsgBox, 2 print pass selected
+Case "20PP": MsgBox, 2 print pass selected
+}
 }
 else
 {
 MsgBox, Neither option was selected
 }
+oWorkbook.Close(1)
 } 
 return
 
